@@ -20,12 +20,12 @@ class WallServiceTest {
         val result = WallService.add(post = postTest)
 
         // assert
-        assertEquals(2, result.id)
-        assertEquals(2, posts.size)
+        assertEquals(3, result.id)
+        assertEquals(3, posts.size)
     }
 
     @Test
-    fun update() {
+    fun updateTrue() {
         // arrange
         var postTestOld = Post(
             Post.Copyright(),
@@ -54,5 +54,36 @@ class WallServiceTest {
 
         // assert
         assertEquals(true, result)
+    }
+
+    @Test
+    fun updateFalse() {
+        // arrange
+        var postTestOld = Post(
+            Post.Copyright(),
+            Post.Comment(),
+            Post.Repost(),
+            text = "aaa",
+            Post.Donut(Post.Limiter()),
+            Post.View(),
+            Post.Like()
+        )
+        var postTestNew = Post(
+            Post.Copyright(),
+            Post.Comment(),
+            Post.Repost(),
+            text = "ccc",
+            Post.Donut(Post.Limiter()),
+            Post.View(),
+            Post.Like(),
+        )
+        // act
+        println(postTestOld.text)
+        val add = WallService.add(post = postTestOld)
+        val result = WallService.update(newPost = postTestNew)
+        println(postTestOld.text)
+
+        // assert
+        assertEquals(false, result)
     }
 }
