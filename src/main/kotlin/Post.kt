@@ -30,35 +30,25 @@ data class Post(
         var isDonut: Boolean = false,
         var editMode: String = "all",
         var paidDuration: Int = 10
-    ) {
+    ) { }
 
-    }
-
-    class Limiter(var bung: String = " ") {
-
-    }
+    class Limiter(var bung: String = " ") { }
 
     class View(
         var count: Int = 0
-    ) {
-
-    }
+    ) { }
 
     class Repost(
         var userReposted: Boolean = false,
         var count: Int = 0
-    ) {
-
-    }
+    ) { }
 
     class Like(
         var canPublish: Boolean = true,
         var userLikes: Boolean = false,
         var canLike: Boolean = true,
         var count: Int = 0
-    ) {
-
-    }
+    ) { }
 
     class Comment(
         var groupsCanPost: Boolean = true,
@@ -66,20 +56,15 @@ data class Post(
         var canOpen: Boolean = false,
         var canPost: Boolean = true,
         var count: Int = 0
-    ) {
-
-    }
+    ) { }
 
     class Copyright(
         var link: String = " ",
         var name: String = " ",
         var type: String = " ",
         val id: Int = 0
-    ) {
-
-    }
+    ) { }
 }
-
 
 object WallService {
     var posts = emptyArray<Post>()
@@ -125,17 +110,29 @@ object WallService {
 }
 
 fun main() {
-    var postOne = Post(Post.Copyright(), Post.Comment(), Post.Repost(), text = "aaa", Post.Donut(Post.Limiter()), Post.View(), Post.Like())
-    println(postOne.id)
+    var postOne = Post(
+        Post.Copyright(),
+        Post.Comment(),
+        Post.Repost(),
+        text = "aaa",
+        Post.Donut(Post.Limiter()),
+        Post.View(),
+        Post.Like()
+    )
     WallService.add(postOne)
-    println(postOne.id)
 
-    var postTwo = Post(Post.Copyright(), Post.Comment(), Post.Repost(), text = "bbb", Post.Donut(Post.Limiter()), Post.View(), Post.Like())
+    var postTwo = Post(
+        Post.Copyright(),
+        Post.Comment(),
+        Post.Repost(),
+        text = "bbb",
+        Post.Donut(Post.Limiter()),
+        Post.View(),
+        Post.Like()
+    )
     WallService.add(postTwo)
 
-    var post3 = postTwo.copy(text = "ccc")
+    var postThree = postTwo.copy(text = "ccc")
 
-    println(postTwo.text)
-    println(if (WallService.update(post3)) "Пост обновлен" else "Не найден пост для обновления")
-    println(postOne.text)
+    println(if (WallService.update(postThree)) "Пост обновлен" else "Не найден пост для обновления")
 }
