@@ -6,6 +6,9 @@ data class Post(
     var donut: Donut,
     var views: View,
     var likes: Like,
+    var postSource: PostSource?,
+    var copyHistory: Array<Post>?,
+    var geo: Geo?,
     var isFavorite: Boolean = false,
     var markedAsAds: Boolean = true,
     var canDelete: Boolean = false,
@@ -30,25 +33,25 @@ data class Post(
         var isDonut: Boolean = false,
         var editMode: String = "all",
         var paidDuration: Int = 10
-    ) { }
+    ) {}
 
-    class Limiter(var bung: String = " ") { }
+    class Limiter(var bung: String = " ") {}
 
     class View(
         var count: Int = 0
-    ) { }
+    ) {}
 
     class Repost(
         var userReposted: Boolean = false,
         var count: Int = 0
-    ) { }
+    ) {}
 
     class Like(
         var canPublish: Boolean = true,
         var userLikes: Boolean = false,
         var canLike: Boolean = true,
         var count: Int = 0
-    ) { }
+    ) {}
 
     class Comment(
         var groupsCanPost: Boolean = true,
@@ -56,14 +59,42 @@ data class Post(
         var canOpen: Boolean = false,
         var canPost: Boolean = true,
         var count: Int = 0
-    ) { }
+    ) {}
 
     class Copyright(
         var link: String = " ",
         var name: String = " ",
         var type: String = " ",
         val id: Int = 0
-    ) { }
+    ) {}
+
+    class PostSource(
+        var type: String = " ",
+        var platform: String = " ",
+        var data: String = " ",
+        var url: String = " "
+        ) { }
+
+    class Geo(
+        var place: Place,
+        var type: String = " ",
+        var coordinates: String = " "
+    ) {
+        class Place(
+            var id: Int = 0,
+            var title: String = " ",
+            var latitude: Int = 0,
+            var longtitude: Int = 0,
+            var created: Int = 0,
+            var icon: String = " ",
+            var checkins: Int = 0,
+            var updated: Int = 0,
+            var type: Int = 0,
+            var country: Int = 0,
+            var city: Int = 0,
+            var address: String = " "
+        ) { }
+    }
 }
 
 object WallService {
@@ -85,23 +116,26 @@ object WallService {
                 oldPost.donut = newPost.component5()
                 oldPost.views = newPost.component6()
                 oldPost.likes = newPost.component7()
-                oldPost.isFavorite = newPost.component8()
-                oldPost.markedAsAds = newPost.component9()
-                oldPost.canDelete = newPost.component10()
-                oldPost.postType = newPost.component11()
-                oldPost.canEdit = newPost.component12()
-                oldPost.canPin = newPost.component13()
-                oldPost.replyOwnerId = newPost.component14()
-                oldPost.createdBy = newPost.component15()
-                oldPost.replyPostId = newPost.component16()
-                oldPost.friendsOnly = newPost.component17()
-                oldPost.postponedId = newPost.component18()
-                oldPost.singerId = newPost.component19()
-                oldPost.ownerId = newPost.component20()
-                oldPost.isPinned = newPost.component21()
-                oldPost.fromId = newPost.component22()
-                oldPost.date = newPost.component23()
-                oldPost.id = newPost.component24()
+                oldPost.postSource = newPost.component8()
+                oldPost.copyHistory = newPost.component9()
+                oldPost.geo = newPost.component10()
+                oldPost.isFavorite = newPost.component11()
+                oldPost.markedAsAds = newPost.component12()
+                oldPost.canDelete = newPost.component13()
+                oldPost.postType = newPost.component14()
+                oldPost.canEdit = newPost.component15()
+                oldPost.canPin = newPost.component16()
+                oldPost.replyOwnerId = newPost.component17()
+                oldPost.createdBy = newPost.component18()
+                oldPost.replyPostId = newPost.component19()
+                oldPost.friendsOnly = newPost.component20()
+                oldPost.postponedId = newPost.component21()
+                oldPost.singerId = newPost.component22()
+                oldPost.ownerId = newPost.component23()
+                oldPost.isPinned = newPost.component24()
+                oldPost.fromId = newPost.component25()
+                oldPost.date = newPost.component26()
+                oldPost.id = newPost.component27()
                 return true
             }
         }
@@ -117,7 +151,10 @@ fun main() {
         text = "aaa",
         Post.Donut(Post.Limiter()),
         Post.View(),
-        Post.Like()
+        Post.Like(),
+        Post.PostSource(),
+        emptyArray<Post>(),
+        Post.Geo(Post.Geo.Place())
     )
     WallService.add(postOne)
 
@@ -128,7 +165,10 @@ fun main() {
         text = "bbb",
         Post.Donut(Post.Limiter()),
         Post.View(),
-        Post.Like()
+        Post.Like(),
+        Post.PostSource(),
+        emptyArray<Post>(),
+        Post.Geo(Post.Geo.Place())
     )
     WallService.add(postTwo)
 

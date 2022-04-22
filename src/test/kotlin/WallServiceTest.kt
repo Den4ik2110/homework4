@@ -14,7 +14,10 @@ class WallServiceTest {
             text = "bbb",
             Post.Donut(Post.Limiter()),
             Post.View(),
-            Post.Like()
+            Post.Like(),
+            Post.PostSource(),
+            emptyArray<Post>(),
+            Post.Geo(Post.Geo.Place())
         )
         // act
         val result = WallService.add(post = postTest)
@@ -34,7 +37,10 @@ class WallServiceTest {
             text = "aaa",
             Post.Donut(Post.Limiter()),
             Post.View(),
-            Post.Like()
+            Post.Like(),
+            Post.PostSource(),
+            emptyArray<Post>(),
+            Post.Geo(Post.Geo.Place())
         )
         var postTestNew = Post(
             Post.Copyright(),
@@ -44,6 +50,9 @@ class WallServiceTest {
             Post.Donut(Post.Limiter()),
             Post.View(),
             Post.Like(),
+            Post.PostSource(),
+            emptyArray<Post>(),
+            Post.Geo(Post.Geo.Place()),
             id = 1
         )
         // act
@@ -66,7 +75,10 @@ class WallServiceTest {
             text = "aaa",
             Post.Donut(Post.Limiter()),
             Post.View(),
-            Post.Like()
+            Post.Like(),
+            Post.PostSource(),
+            emptyArray<Post>(),
+            Post.Geo(Post.Geo.Place())
         )
         var postTestNew = Post(
             Post.Copyright(),
@@ -76,6 +88,9 @@ class WallServiceTest {
             Post.Donut(Post.Limiter()),
             Post.View(),
             Post.Like(),
+            Post.PostSource(),
+            emptyArray<Post>(),
+            Post.Geo(Post.Geo.Place())
         )
         // act
         println(postTestOld.text)
