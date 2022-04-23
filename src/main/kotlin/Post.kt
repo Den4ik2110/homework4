@@ -1,14 +1,17 @@
+import Attachment.Attachment
+
 data class Post(
-    var copyright: Copyright,
-    var comments: Comment,
-    var reposts: Repost,
     var text: String,
-    var donut: Donut,
-    var views: View,
-    var likes: Like,
-    var postSource: PostSource?,
-    var copyHistory: Array<Post>?,
-    var geo: Geo?,
+    var attachment: Array<Attachment> = emptyArray(),
+    var copyHistory: Array<Post>? = emptyArray(),
+    var postSource: PostSource? = null,
+    var copyright: Copyright = Copyright(),
+    var comments: Comment = Comment(),
+    var reposts: Repost = Repost(),
+    var donut: Donut = Donut(),
+    var views: View = View(),
+    var likes: Like = Like(),
+    var geo: Geo? = Geo(),
     var isFavorite: Boolean = false,
     var markedAsAds: Boolean = true,
     var canDelete: Boolean = false,
@@ -28,7 +31,7 @@ data class Post(
     var id: Int = 0
 ) {
     class Donut(
-        var placeholder: Limiter,
+        var placeholder: Limiter = Limiter(),
         var canPublishFreeCopy: Boolean = true,
         var isDonut: Boolean = false,
         var editMode: String = "all",
@@ -76,7 +79,7 @@ data class Post(
         ) { }
 
     class Geo(
-        var place: Place,
+        var place: Place = Place(),
         var type: String = " ",
         var coordinates: String = " "
     ) {
@@ -109,33 +112,34 @@ object WallService {
     fun update(newPost: Post): Boolean {
         for (oldPost in posts) {
             if (newPost.id == oldPost.id) {
-                oldPost.copyright = newPost.component1()
-                oldPost.comments = newPost.component2()
-                oldPost.reposts = newPost.component3()
-                oldPost.text = newPost.component4()
-                oldPost.donut = newPost.component5()
-                oldPost.views = newPost.component6()
-                oldPost.likes = newPost.component7()
-                oldPost.postSource = newPost.component8()
-                oldPost.copyHistory = newPost.component9()
-                oldPost.geo = newPost.component10()
-                oldPost.isFavorite = newPost.component11()
-                oldPost.markedAsAds = newPost.component12()
-                oldPost.canDelete = newPost.component13()
-                oldPost.postType = newPost.component14()
-                oldPost.canEdit = newPost.component15()
-                oldPost.canPin = newPost.component16()
-                oldPost.replyOwnerId = newPost.component17()
-                oldPost.createdBy = newPost.component18()
-                oldPost.replyPostId = newPost.component19()
-                oldPost.friendsOnly = newPost.component20()
-                oldPost.postponedId = newPost.component21()
-                oldPost.singerId = newPost.component22()
-                oldPost.ownerId = newPost.component23()
-                oldPost.isPinned = newPost.component24()
-                oldPost.fromId = newPost.component25()
-                oldPost.date = newPost.component26()
-                oldPost.id = newPost.component27()
+                oldPost.text = newPost.component1()
+                oldPost.attachment = newPost.component2()
+                oldPost.copyHistory = newPost.component3()
+                oldPost.postSource = newPost.component4()
+                oldPost.copyright = newPost.component5()
+                oldPost.comments = newPost.component6()
+                oldPost.reposts = newPost.component7()
+                oldPost.donut = newPost.component8()
+                oldPost.views = newPost.component9()
+                oldPost.likes = newPost.component10()
+                oldPost.geo = newPost.component11()
+                oldPost.isFavorite = newPost.component12()
+                oldPost.markedAsAds = newPost.component13()
+                oldPost.canDelete = newPost.component14()
+                oldPost.postType = newPost.component15()
+                oldPost.canEdit = newPost.component16()
+                oldPost.canPin = newPost.component17()
+                oldPost.replyOwnerId = newPost.component18()
+                oldPost.createdBy = newPost.component19()
+                oldPost.replyPostId = newPost.component20()
+                oldPost.friendsOnly = newPost.component21()
+                oldPost.postponedId = newPost.component22()
+                oldPost.singerId = newPost.component23()
+                oldPost.ownerId = newPost.component24()
+                oldPost.isPinned = newPost.component25()
+                oldPost.fromId = newPost.component26()
+                oldPost.date = newPost.component27()
+                oldPost.id = newPost.component28()
                 return true
             }
         }
@@ -145,30 +149,12 @@ object WallService {
 
 fun main() {
     var postOne = Post(
-        Post.Copyright(),
-        Post.Comment(),
-        Post.Repost(),
-        text = "aaa",
-        Post.Donut(Post.Limiter()),
-        Post.View(),
-        Post.Like(),
-        Post.PostSource(),
-        emptyArray<Post>(),
-        Post.Geo(Post.Geo.Place())
+        text = "aaa"
     )
     WallService.add(postOne)
 
     var postTwo = Post(
-        Post.Copyright(),
-        Post.Comment(),
-        Post.Repost(),
-        text = "bbb",
-        Post.Donut(Post.Limiter()),
-        Post.View(),
-        Post.Like(),
-        Post.PostSource(),
-        emptyArray<Post>(),
-        Post.Geo(Post.Geo.Place())
+        text = "bbb"
     )
     WallService.add(postTwo)
 

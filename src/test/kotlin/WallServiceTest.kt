@@ -8,16 +8,7 @@ class WallServiceTest {
     fun add() {
         // arrange
         var postTest = Post(
-            Post.Copyright(),
-            Post.Comment(),
-            Post.Repost(),
-            text = "bbb",
-            Post.Donut(Post.Limiter()),
-            Post.View(),
-            Post.Like(),
-            Post.PostSource(),
-            emptyArray<Post>(),
-            Post.Geo(Post.Geo.Place())
+            text = "bbb"
         )
         // act
         val result = WallService.add(post = postTest)
@@ -31,28 +22,10 @@ class WallServiceTest {
     fun updateTrue() {
         // arrange
         var postTestOld = Post(
-            Post.Copyright(),
-            Post.Comment(),
-            Post.Repost(),
-            text = "aaa",
-            Post.Donut(Post.Limiter()),
-            Post.View(),
-            Post.Like(),
-            Post.PostSource(),
-            emptyArray<Post>(),
-            Post.Geo(Post.Geo.Place())
+            text = "aaa"
         )
         var postTestNew = Post(
-            Post.Copyright(),
-            Post.Comment(),
-            Post.Repost(),
             text = "ccc",
-            Post.Donut(Post.Limiter()),
-            Post.View(),
-            Post.Like(),
-            Post.PostSource(),
-            emptyArray<Post>(),
-            Post.Geo(Post.Geo.Place()),
             id = 1
         )
         // act
@@ -69,28 +42,10 @@ class WallServiceTest {
     fun updateFalse() {
         // arrange
         var postTestOld = Post(
-            Post.Copyright(),
-            Post.Comment(),
-            Post.Repost(),
-            text = "aaa",
-            Post.Donut(Post.Limiter()),
-            Post.View(),
-            Post.Like(),
-            Post.PostSource(),
-            emptyArray<Post>(),
-            Post.Geo(Post.Geo.Place())
+            text = "aaa"
         )
         var postTestNew = Post(
-            Post.Copyright(),
-            Post.Comment(),
-            Post.Repost(),
-            text = "ccc",
-            Post.Donut(Post.Limiter()),
-            Post.View(),
-            Post.Like(),
-            Post.PostSource(),
-            emptyArray<Post>(),
-            Post.Geo(Post.Geo.Place())
+            text = "ccc"
         )
         // act
         println(postTestOld.text)
