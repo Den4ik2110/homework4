@@ -102,10 +102,10 @@ data class Post(
 }
 
 data class Comment(
-    var message: String,
+    var postId: Int,
+    var message: String = " ",
     var commentId: Int = 0,
     var ownerId: Int = -1,
-    var postId: Int = 1,
     var fromGroup: Int = 1,
     var replyToComment: Int = 1,
     var attachment: Array<Attachment> = emptyArray(),
@@ -190,7 +190,7 @@ fun main() {
 
     println(if (WallService.update(postThree)) "Пост обновлен" else "Не найден пост для обновления")
 
-    var commentOne: Comment = Comment("First comment")
+    var commentOne: Comment = Comment(1)
 
     WallService.createComment(commentOne)
 }
