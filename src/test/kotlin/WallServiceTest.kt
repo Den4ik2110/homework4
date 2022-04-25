@@ -1,3 +1,4 @@
+import WallService.comments
 import WallService.posts
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -55,5 +56,25 @@ class WallServiceTest {
 
         // assert
         assertEquals(false, result)
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun shouldThrow() {
+        // arrange
+        var commentTest = Comment(postId = 10)
+        // act
+        val result = WallService.createComment(comment = commentTest)
+        // assert
+        assertEquals(1, result)
+    }
+
+    @Test
+    fun notShouldThrow() {
+        // arrange
+        var commentTest = Comment(postId = 1)
+        // act
+        val result = WallService.createComment(comment = commentTest)
+        // assert
+        assertEquals(1, comments.size)
     }
 }
