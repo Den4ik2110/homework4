@@ -1,4 +1,5 @@
 import Attachment.Attachment
+import kotlin.RuntimeException
 
 data class Post(
     var text: String,
@@ -76,7 +77,7 @@ data class Post(
         var platform: String = " ",
         var data: String = " ",
         var url: String = " "
-        ) { }
+    ) {}
 
     class Geo(
         var place: Place = Place(),
@@ -96,12 +97,39 @@ data class Post(
             var country: Int = 0,
             var city: Int = 0,
             var address: String = " "
-        ) { }
+        ) {}
     }
 }
 
+data class Comment(
+    var message: String,
+    var commentId: Int = 0,
+    var ownerId: Int = -1,
+    var postId: Int = 1,
+    var fromGroup: Int = 1,
+    var replyToComment: Int = 1,
+    var attachment: Array<Attachment> = emptyArray(),
+    var stickerId: Int = 4,
+    var quid: String = " "
+) {}
+
+class PostNotFoundException(message: String): RuntimeException(message)
+
 object WallService {
     var posts = emptyArray<Post>()
+    var comments = emptyArray<Comment>()
+
+    fun createComment(comment: Comment) {
+        for (i in posts.indices) {
+            if (posts[i].id == comment.postId) {
+                comment.commentId = comments.size + 1
+                comments += comment
+                println("Комментарий добавлен")
+                return
+            }
+        }
+        throw PostNotFoundException ("Максимальное значение id среди имеющихся постов = ${posts.size}, хотите добавить комментарий к посту с id = ${comment.postId}")
+    }
 
     fun add(post: Post): Post {
         post.id = posts.size + 1
@@ -161,4 +189,8 @@ fun main() {
     var postThree = postTwo.copy(text = "ccc")
 
     println(if (WallService.update(postThree)) "Пост обновлен" else "Не найден пост для обновления")
+
+    var commentOne: Comment = Comment("First comment")
+
+    WallService.createComment(commentOne)
 }
